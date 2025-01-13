@@ -1,39 +1,18 @@
 package com.example.kiosk.lv3;
 
 
+
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-        Menu menu = new Menu();
-        List<MenuItem> menuList = new ArrayList<>(menu.menu);
-        loop:
-        while (true) {
-            System.out.println("[ SHAKESHACK MENU ]");
-            int count = 1;
-            if (menuList.isEmpty()) {
-                System.out.println("메뉴가 존재하지 않습니다.");
-            } else {
-                for (MenuItem a : menuList) {
-                    System.out.println(count + ". " + a.name + " | W " + a.price + " | " + a.info);
-                    count++;
-                }
-            }
-            System.out.println("0. 종료   | 종료");
-            int choice = sc.nextInt();
-            sc.nextLine();
-            if (choice == 0) {
-                System.out.println("프로그램을 종료합니다.");
-                break loop;
-            } else if (choice > menuList.size() - 1 || choice < 0) {
-                System.out.println("존재하지 않은 메뉴입니다.");
-            } else {
-                MenuItem choiceMenu = menuList.get(choice - 1);
-                System.out.println(choiceMenu.name + "을 선택하셨습니다.");
-            }
-        }
+        List<MenuItem> menuItems = new ArrayList<>();
+        menuItems.add(new MenuItem("ShackBurger",6.9,"토마토, 양상추, 쉑소스가 토핑된 치즈버거"));
+        menuItems.add(new MenuItem("SmokeShack",8.9,"베이컨, 체리 페퍼에 쉑소스가 토핑된 치즈버거"));
+        menuItems.add(new MenuItem("Cheeseburger",6.9,"포테이토 번과 비프패티, 치즈가 토핑된 치즈버거"));
+        menuItems.add(new MenuItem("Hamburger",5.4,"비프패티를 기반으로 야채가 들어간 기본버거"));
+        Kiosk kiosk = new Kiosk(menuItems);
+        kiosk.start();
     }
 }
