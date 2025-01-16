@@ -8,12 +8,12 @@ public class Menu {
     String category;
     List<MenuItem> menuItems;
 
-    public Menu(String category, List<MenuItem> menuItems){
+    public Menu(String category, List<MenuItem> menuItems) {
         this.category = category;
         this.menuItems = menuItems;
     }
 
-    public List<MenuItem> getItems(){
+    public List<MenuItem> getItems() {
         return new ArrayList<>(this.menuItems);
     }
 }

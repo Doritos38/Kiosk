@@ -5,21 +5,21 @@ public class MenuItem {
     private final double price;
     private final String info;
 
-    public MenuItem(String name, double price, String info){
+    public MenuItem(String name, double price, String info) {
         this.name = name;
         this.price = price;
         this.info = info;
     }
 
-    public String getName(){
+    public String getName() {
         return this.name;
     }
 
-    public double getPrice(){
+    public double getPrice() {
         return this.price;
     }
 
-    public String getInfo(){
+    public String getInfo() {
         return this.info;
     }
 }

@@ -6,10 +6,10 @@ import java.util.Scanner;
 
 public class Kiosk {
 
-    public void start(List<Menu> menu){
+    public void start(List<Menu> menu) {
         Scanner sc = new Scanner(System.in);
 
-        while(true) {
+        while (true) {
             System.out.println("[ MAIN MENU ]");
             int countCtg = 1;
             for (Menu menuSelect : menu) {
@@ -21,7 +21,7 @@ public class Kiosk {
             int choiceCtg = sc.nextInt();
             sc.nextLine();
 
-            if(choiceCtg > 0 && choiceCtg <= menu.size()) {
+            if (choiceCtg > 0 && choiceCtg <= menu.size()) {
                 int countMenu = 1;
                 while (true) {
                     List<MenuItem> menuItems = menu.get(choiceCtg - 1).getItems();
@@ -47,10 +47,10 @@ public class Kiosk {
                         countMenu = 1;
                     }
                 }
-            }else if(choiceCtg == 0){
+            } else if (choiceCtg == 0) {
                 System.out.println("프로그램이 종료됩니다.");
                 break;
-            }else{
+            } else {
                 System.out.println("잘못된 입력입니다.");
             }
         }

@@ -8,12 +8,13 @@ import java.util.Scanner;
 public class Kiosk {
     Scanner sc = new Scanner(System.in);
     List<MenuItem> menuList;
-    public Kiosk(List<MenuItem> menuList){
+
+    public Kiosk(List<MenuItem> menuList) {
         this.menuList = menuList;
     }
 
-    public void start(){
-        while(true) {
+    public void start() {
+        while (true) {
             System.out.println("[ SHAKESHACK MENU ]");
             int count = 1;
             if (menuList.isEmpty()) {

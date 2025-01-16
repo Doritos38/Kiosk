@@ -7,36 +7,44 @@ import java.util.stream.IntStream;
 public class Basket {
     private List<Order> shopingBasket = new ArrayList<>();
 
-    public void addBasket(Order order){
-        int count = 0;
-        for(Order orders : shopingBasket){
-            if(orders.getItemName().equals(order.getItemName())){
-                orders.addCount();
-                break;
-            }
-            count++;
-        }
-        if(count == shopingBasket.size()){
+    public void addBasket(Order order) {
+        boolean check = shopingBasket.stream().
+                filter(o -> o.getItemName().equals(order.getItemName())).findFirst()
+                .map(o -> {
+                    o.addCount();
+                    return true;
+                })
+                .orElse(false);
+
+        if (!check) {
             shopingBasket.add(order);
         }
     }
 
-    public void viewBasket(){
+    public void viewBasket() {
         IntStream.range(0, shopingBasket.size())
-                .forEach(i -> System.out.println(i+1 + ". " + shopingBasket.get(i).getItemName() + " | 수량 : " +
+                .forEach(i -> System.out.println(i + 1 + ". " + shopingBasket.get(i).getItemName() + " | 수량 : " +
                         shopingBasket.get(i).getItemCount() + "개 | 가격 : " + shopingBasket.get(i).getItemPrice()));
     }
 
-    public double totalPrice(){
-       return shopingBasket.stream().map(o -> o.getItemCount() * o.getItemPrice()).reduce(0.0, (total, price) -> total+price);
+    public double totalPrice() {
+        return shopingBasket.stream().map(o -> o.getItemCount() * o.getItemPrice()).reduce(0.0, (total, price) -> total + price);
     }
 
-    public boolean basketIsEmpty(){
+    public boolean checkEmpty() {
         return this.shopingBasket.isEmpty();
     }
 
-    public void emptyBacket(){
+    public void emptyBasket() {
         this.shopingBasket.clear();
+    }
+
+    public void delSelectItem(int num) {
+        if (0 < num && num <= shopingBasket.size()) {
+            this.shopingBasket.remove(num - 1);
+        } else {
+            System.out.println("잘못된");
+        }
     }
 
 }

@@ -6,7 +6,7 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        while(true){
+        while (true) {
             System.out.println("[ SHAKESHACK MENU ]");
             System.out.println("1. ShackBurger   | W 6.9 | 토마토, 양상추, 쉑소스가 토핑된 치즈버거");
             System.out.println("2. SmokeShack    | W 8.9 | 베이컨, 체리 페퍼에 쉑소스가 토핑된 치즈버거");
@@ -16,13 +16,13 @@ public class Main {
             System.out.println("0. 종료   | 종료");
             int choice = sc.nextInt();
             sc.nextLine();
-            if(choice == 0){
+            if (choice == 0) {
                 System.out.println("프로그램을 종료합니다.");
                 break;
-            }else if(choice>4 || choice < 0){
+            } else if (choice > 4 || choice < 0) {
                 System.out.println("존재하지 않은 메뉴입니다.");
-            }else{
-                System.out.println(choice+"번 메뉴를 선택하셨습니다.");
+            } else {
+                System.out.println(choice + "번 메뉴를 선택하셨습니다.");
             }
         }
     }
