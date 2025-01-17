@@ -13,13 +13,13 @@ public class Kiosk {
         while (true) {
             System.out.println("[ MAIN MENU ]");
             IntStream.range(0, menu.size())     //  메인메뉴 출력
-                    .forEach(i -> System.out.println(i + 1 + ". " + menu.get(i).getCategory()));
+                    .forEach(i -> System.out.printf("%d. %s%n", i + 1, menu.get(i).getCategory()));
 
             if (!basket.checkEmpty()) {        //  장바구니 있을경우 아래 메뉴 추가 표시
                 System.out.println();
                 System.out.println("[ ORDERS MENU ]");
-                System.out.println(menu.size() + ". Orders       | 장바구니를 확인 후 주문합니다.");
-                System.out.println(menu.size() + ". Cancle       | 진행중인 주문을 취소합니다.");
+                System.out.printf("%d. Orders       | 장바구니를 확인후 주문합니다.%n", menu.size() + 1);
+                System.out.printf("%d. Cancle       | 진행중인 주문을 취소합니다.%n", menu.size() + 2);
             }
             System.out.println("0. 종료  | 종료");
 
@@ -55,10 +55,9 @@ public class Kiosk {
     private void detailedMenu(List<Menu> menu, int choiceCtg) {
         List<MenuItem> menuItems = menu.get(choiceCtg - 1).getItems();
         while (true) {
-            System.out.println("[ " + menu.get(choiceCtg - 1).getCategory() + " MENU ]");   //      선택 카테고리 상세 메뉴 출력
+            System.out.printf("[ %s MENU ]%n", menu.get(choiceCtg - 1).getCategory());  //      선택 카테고리 상세 메뉴 출력
             IntStream.range(0, menuItems.size())
-                    .forEach(i -> System.out.println(i + 1 + ". " + menuItems.get(i).getName() + " | W " +
-                            menuItems.get(i).getPrice() + " | " + menuItems.get(i).getInfo()));
+                    .forEach(i -> System.out.printf("%d. %s | W %f | %s%n", i + 1, menuItems.get(i).getName(), menuItems.get(i).getPrice(), menuItems.get(i).getInfo()));
             System.out.println("0. 뒤로가기");
 
             int choice = choice();
@@ -68,14 +67,14 @@ public class Kiosk {
                 break;
             } else if (choice <= menuItems.size() - 1 && choice > 0) {      //      선택한 상품 장바구니에 넣기
                 MenuItem choiceMenu = menuItems.get(choice - 1);
-                System.out.println("선택한 메뉴: " + choiceMenu.getName() + " | W " + choiceMenu.getPrice() + " | " + choiceMenu.getInfo());
+                System.out.printf("선택한 메뉴: %s | W %f | %s%n", choiceMenu.getName(), choiceMenu.getPrice(), choiceMenu.getInfo());
                 System.out.println("위 메뉴를 장바구니에 추가하시겠습니까?");
                 System.out.println("1. 확인        2. 취소");
                 int choiceBasket = choice();
 
                 if (choiceBasket == 1) {
                     basket.addBasket(new Order(choiceMenu.getName(), 1, choiceMenu.getPrice()));
-                    System.out.println(choiceMenu.getName() + " 이 장바구니에 추가되었습니다.");
+                    System.out.printf("%s가 장바구니에 추가되었습니다.%n", choiceMenu.getName());
                 } else if (choiceBasket == 2) {
                     System.out.println("돌아갑니다.");
                 } else {
@@ -95,7 +94,7 @@ public class Kiosk {
             basket.viewBasket();
             System.out.println();
             System.out.println("[ Total ]");
-            System.out.println("W " + basket.totalPrice());
+            System.out.printf("W %f%n", basket.totalPrice());
             System.out.println("1. 주문       2. 장바구니에서 빼기        3. 돌아가기");
 
             int choiceOrder = choice();
@@ -108,7 +107,7 @@ public class Kiosk {
                 System.out.println("몇번 상품을 빼시겠습니까?");
                 int delChoice = choice();
                 basket.delSelectItem(delChoice);
-                System.out.println(delChoice + "번 상품을 장바구니에서 뺐습니다.");
+                System.out.printf("%d번 상품을 장바구니에서 뺐습니다.", delChoice);
                 break;
             } else if (choiceOrder == 3) {      //      메인 카테고리 메뉴로 돌아가기
                 break;
@@ -125,16 +124,16 @@ public class Kiosk {
             int position = choice();
             switch (position) {     //      할인 젹용 후 자동 결제
                 case 1:
-                    System.out.println("주문이 완료되었습니다. 금액은 W " + User.MERITORIOUS.discount(total) + " 입니다.");
+                    System.out.printf("주문이 완료되었습니다. 금액은 W %f 입니다.%n", User.MERITORIOUS.discount(total));
                     break loop;
                 case 2:
-                    System.out.println("주문이 완료되었습니다. 금액은 W " + User.SOLDIER.discount(total) + " 입니다.");
+                    System.out.printf("주문이 완료되었습니다. 금액은 W %f 입니다.%n", User.SOLDIER.discount(total));
                     break loop;
                 case 3:
-                    System.out.println("주문이 완료되었습니다. 금액은 W " + User.STUDENT.discount(total) + " 입니다.");
+                    System.out.printf("주문이 완료되었습니다. 금액은 W %f 입니다.%n", User.STUDENT.discount(total));
                     break loop;
                 case 4:
-                    System.out.println("주문이 완료되었습니다. 금액은 W " + User.PERSON.discount(total) + " 입니다.");
+                    System.out.printf("주문이 완료되었습니다. 금액은 W %f 입니다.%n", User.PERSON.discount(total));
                     break loop;
                 default:
                     System.out.println("잘못된 입력입니다.");       //      재선택

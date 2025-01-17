@@ -23,12 +23,13 @@ public class Basket {
 
     public void viewBasket() {
         IntStream.range(0, shopingBasket.size())
-                .forEach(i -> System.out.println(i + 1 + ". " + shopingBasket.get(i).getItemName() + " | 수량 : " +
-                        shopingBasket.get(i).getItemCount() + "개 | 가격 : " + shopingBasket.get(i).getItemPrice()));
+                .forEach(i -> System.out.printf("%d. %s | 수량 : %d개 | 가격 : %f%n", i + 1,
+                        shopingBasket.get(i).getItemName(), shopingBasket.get(i).getItemCount(), shopingBasket.get(i).getItemPrice()));
     }
 
     public double totalPrice() {
-        return shopingBasket.stream().map(o -> o.getItemCount() * o.getItemPrice()).reduce(0.0, (total, price) -> total + price);
+        return shopingBasket.stream().map(o -> o.getItemCount() * o.getItemPrice())
+                .reduce(0.0, (total, price) -> total + price);
     }
 
     public boolean checkEmpty() {
